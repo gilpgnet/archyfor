@@ -1,32 +1,13 @@
-import { setVisible } from "../lib/util.js";
 customElements.define("herramientas-detalle", class extends HTMLElement {
-  static get observedAttributes() {
-    return ["regreso", "agrega"];
-  }
   connectedCallback() {
-    if (!this.hasAttribute("regreso")) {
-      this.setAttribute("regreso", "index.html");
+    const regreso = this.hasAttribute("regreso") ? this.getAttribute("regreso") : "index.html";
+    let contenido =
+      `<a accesskey="C" href="${regreso}">Cancelar</a>
+      <input type="submit" accesskey="G" value="Guardar">`;
+    if (!this.hasAttribute("agrega")) {
+      contenido +=
+        `<input name="elimina" type="button" accesskey="E" value="Eliminar">`;
     }
-    this.innerHTML =
-      `<a accesskey="C" href="${this.getAttribute('regreso')}">Cancelar</a>
-      <input type="submit" accesskey="G" value="Guardar">
-      <input name="elimina" type="button" accesskey="E" value="Eliminar">`;
-    this.actualizaElimina();
-  }
-  attributeChangedCallback(nombre, valorAnterior, valorNuevo) {
-    switch (nombre) {
-      case "regeso":
-        const a = this.querySelector(a);
-        if (a) {
-          a.href = valorNuevo;
-        }
-        break;
-      case "agrega":
-        this.actualizaElimina();
-        break;
-    }
-  }
-  actualizaElimina() {
-    setVisible(this.querySelector("[name=elimina]"), !this.hasAttribute("agrega"));
+    this.innerHTML = contenido;
   }
 });

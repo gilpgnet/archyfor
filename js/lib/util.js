@@ -7,20 +7,6 @@ export function eh(texto) {
   div.innerText = texto;
   return div.innerHTML;
 }
-export function setVisible(element, visible) {
-  if (element) {
-    if (visible) {
-      element.style.height = "";
-      element.style.width = "";
-      element.style.overflow = "";
-    } else {
-      element.style.height = "0";
-      element.style.width = "0";
-      element.style.overflow = "hidden";
-    }
-    element.style.display = visible ? "" : "none";
-  }
-}
 export async function fetchJson(url, datos) {
   const respuestaHttp = await fetch(url, datos);
   if (respuestaHttp.ok) {

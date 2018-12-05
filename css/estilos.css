@@ -23,7 +23,6 @@ main {
 }
 herramientas-detalle, campos-usuario, lista-basica {display: block}
 p, lista-basica, herramientas-detalle {margin: 1em}
-p {margin: 1em}
 p img {max-width: 100%}
 lista-basica.cargando::before {
   content: "Cargando…";
