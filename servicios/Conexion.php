@@ -55,9 +55,6 @@ class Conexion {
   public function fetch_object() {
     return $this->ej($this->res->fetch_object());
   }
-  public function send_long_data($num_param, $chunk) {
-    return $this->ej($this->stmt->send_long_data($num_param, $chunk));
-  }
   public function fetch_all() {
     return $this->ej($this->res->fetch_all(MYSQLI_ASSOC));
   }
