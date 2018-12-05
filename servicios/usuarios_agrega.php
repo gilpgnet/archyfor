@@ -26,19 +26,10 @@ try {
   } else {
     throw new Exception("Falta el Avatar.");
   }
-  $con->prepare(
+  $con->execute(
     "INSERT INTO USUARIO (USU_CUE, USU_AVATAR, USU_MATCH, USU_NOMBRE, PAS_ID)
-     VALUES (?,?,SHA1(?),?,?)");
-  $av = NULL;
-  $con->bind_param("sbssi", $cue, $av, $match, $nombre, $pas_id);
-  $chunks = str_split($avatar, 8192);
-  for ($i = 0, $count = count($chunks); $i < $count; $i++) {
-    /* parámetros:
-     * 0 - $cue
-     * 1 - $av */
-    $con->send_long_data(1, $chunks[$i]);
-  }
-  $con->execute();
+     VALUES (?,?,SHA1(?),?,?)",
+    "ssssi", $cue, $avatar, $match, $nombre, $pas_id);
   if ($rol_ids) {
     $con->prepare("INSERT INTO USUARIO_ROL (USU_CUE,ROL_ID) VALUES (?,?)");
     foreach ($rol_ids as $rol_id) {

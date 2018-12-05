@@ -32,19 +32,11 @@ try {
   }
   if (isset($_FILES["avatar"]) && $_FILES["avatar"]["size"] > 0) {
     $avatar = getDataAsURL($_FILES["avatar"]["tmp_name"]);
-    $len = strlen($avatar);
-    $con->prepare(
+    $con->execute(
       "UPDATE USUARIO
       SET USU_AVATAR = ?
-      WHERE USU_CUE = ?");
-    $av = NULL;
-    $con->bind_param("bs", $av, $cue);
-    $chunks = str_split($avatar, 8192);
-    for ($i = 0, $count = count($chunks); $i < $count; $i++) {
-      /* parámetros: 0 - $av */
-      $con->send_long_data(0, $chunks[$i]);
-    }
-    $con->execute();
+      WHERE USU_CUE = ?",
+      "ss", $avatar, $cue);
   }
   $con->execute("DELETE FROM USUARIO_ROL WHERE USU_CUE = ?", "s", $cue);
   if ($rol_ids) {
