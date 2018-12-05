@@ -1,5 +1,6 @@
 customElements.define("boton-visibilidad", class extends HTMLElement {
   constructor() {
+    super();
     this.cliqueado = this.cliqueado.bind(this);
   }
   connectedCallback() {

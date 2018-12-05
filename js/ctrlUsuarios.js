@@ -1,5 +1,12 @@
-import {query} from "./lib/util.js";
+import { query, muestraError } from "./lib/util.js";
 const lista = document.querySelector("lista-basica");
 lista.cargando();
-consulta("servicios/usuarios_consulta.php",
-    respuesta => lista.muesta("usuario.html?cue=", respuesta.lista));
+carga();
+async function carga() {
+  try {
+    const respuesta = await query("servicios/usuarios_lista.php");
+    lista.muestra("usuario.html?cue=", respuesta.lista);
+  } catch (e) {
+    muestraError(e);
+  }
+}

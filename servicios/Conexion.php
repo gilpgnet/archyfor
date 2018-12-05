@@ -1,7 +1,7 @@
 <?php
 class Conexion {
   private $mysqli;
-  private $stmt;
+  public $stmt;
   private $res;
   public function __construct($mysqli) {
     $this->mysqli = $mysqli;
@@ -17,23 +17,28 @@ class Conexion {
   public function prepare($query) {
     $this->stmt = $this->ej($this->mysqli->prepare($query));
   }
-  public function bind_execute() {
+  public function bind_param() {
     $args = func_get_args();
     for ($i = 1, $count = count($args); $i < $count; $i++) {
       $args[$i] = &$args[$i];
     }
     $this->ej(call_user_func_array([$this->stmt, "bind_param"], $args));
+  }
+  public function bind_execute() {
+    $args = func_get_args();
+    $this->ej(call_user_func_array([$this, "bind_param"], $args));
     $this->stmt->execute();
   }
   public function execute() {
-    $this->prepare(func_get_arg(0));
-    if (func_num_args() > 1) {
-      $args = func_get_args();
-      array_shift($args);
-      call_user_func_array([$this, "bind_execute"], $args);
-    } else {
-      $this->stmt->execute();
+    if (func_num_args() > 0) {
+      $this->prepare(func_get_arg(0));
+      if (func_num_args() > 1) {
+        $args = func_get_args();
+        array_shift($args);
+        call_user_func_array([$this, "bind_param"], $args);
+      }
     }
+    $this->ej($this->stmt->execute());
   }
   public function query($query) {
     switch (func_num_args()) {
@@ -49,6 +54,9 @@ class Conexion {
   }
   public function fetch_object() {
     return $this->ej($this->res->fetch_object());
+  }
+  public function send_long_data($num_param, $chunk) {
+    return $this->ej($this->stmt->send_long_data($num_param, $chunk));
   }
   public function fetch_all() {
     return $this->ej($this->res->fetch_all(MYSQLI_ASSOC));

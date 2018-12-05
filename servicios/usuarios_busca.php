@@ -7,18 +7,18 @@ try {
   $con->verifica();
   $con->begin_transaction(MYSQLI_TRANS_START_READ_ONLY);
   $cue = trim(filter_input(INPUT_GET, "cue"));
-  $afi_id = null;
+  $pas_id = null;
   $roles = [];
   if ($cue) {
     // Recupera objeto.
     $con->query(
-      "SELECT USU_NOMBRE AS nombre, AFI_ID AS afi_id
+      "SELECT USU_AVATAR as avatar, USU_NOMBRE AS nombre, PAS_ID AS pas_id
         FROM USUARIO
         WHERE USU_CUE = ?",
       "s", $cue);
     if ($obj = $con->fetch_object()) {
       $respuesta->modelo = $obj;
-      $afi_id = $obj->afi_id;
+      $pas_id = $obj->pas_id;
     } else {
       throw new Exception("Registro no encontrado.");
     }
@@ -32,15 +32,19 @@ try {
   }
   // Recupera aficiones para el select. (Relación a uno.)
   $con->query(
-    "SELECT AFI_ID, AFI_NOMBRE
-      FROM AFICION
-      ORDER BY UPPER(AFI_NOMBRE)");
-  $respuesta->aficiones = [];
+    "SELECT PAS_ID, PAS_NOMBRE
+      FROM PASATIEMPO
+      ORDER BY UPPER(PAS_NOMBRE)");
+  $respuesta->pasatiempos = [(object) [
+    "value" => "",
+    "selected" => $pas_id == null,
+    "text" => "Sin pasatiempo",
+  ]];
   while ($obj = $con->fetch_object()) {
-    $respuesta->aficiones[] = (object) [
-      "value" => $obj->AFI_ID,
-      "selected" => $obj->AFI_ID == $afi_id,
-      "text" => $obj->AFI_NOMBRE,
+    $respuesta->pasatiempos[] = (object) [
+      "value" => $obj->PAS_ID,
+      "selected" => $obj->PAS_ID == $pas_id,
+      "text" => $obj->PAS_NOMBRE,
     ];
   }
   // Recupera roles para el select

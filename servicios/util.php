@@ -11,7 +11,7 @@ function devuelve($respuesta) {
   header('Content-type: application/json');
   echo \json_encode($respuesta);
 }
-function getDataURI($archivo) {
+function getDataAsURL($archivo) {
   $finfo = new finfo(FILEINFO_MIME);
   return 'data: ' . $finfo->file($archivo) . ';base64,' . base64_encode(file_get_contents($archivo));
 }

@@ -2,7 +2,9 @@
 body, input, a {font-family: sans-serif}
 body {margin: 0}
 header {
-  text-align: center
+  text-align: center;
+  /* Evita que los márgenes colapsen. */
+  overflow: auto
 }
 header, header * {
   background-color: #3F51B5;
@@ -19,7 +21,10 @@ main {
   max-width: 600px;
   margin: 0 auto;
 }
-campos-usuario, lista-basica {display: block}
+herramientas-detalle, campos-usuario, lista-basica {display: block}
+p, lista-basica, herramientas-detalle {margin: 1em}
+p {margin: 1em}
+p img {max-width: 100%}
 lista-basica.cargando::before {
   content: "Cargando…";
   text-align: center;
@@ -31,17 +36,21 @@ lista-basica.vacio::before {
   font-size: small
 }
 lista-basica .fila {
+  margin: 0.5em 0;
+  display: grid;
   grid-template-columns: 100px auto;
   grid-template-rows: auto auto;
   grid-template-areas: 
     "imagen texto1"
     "imagen texto2";
+  grid-column-gap: 0.2em
 }
-lista-basica .fila .imagen {grid-area: imagen}
+lista-basica .fila .imagen {
+  grid-area: imagen;
+  max-width: 100px;
+}
 lista-basica .fila .texto1 {grid-area: texto1}
 lista-basica .fila .texto2 {grid-area: texto2}
-p {margin: 1em}
-p img {max-width: 100%}
 label {
   display: block;
   font-size: small;

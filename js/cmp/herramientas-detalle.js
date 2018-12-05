@@ -5,7 +5,7 @@ customElements.define("herramientas-detalle", class extends HTMLElement {
   }
   connectedCallback() {
     if (!this.hasAttribute("regreso")) {
-      this.setAttribute("index.html");
+      this.setAttribute("regreso", "index.html");
     }
     this.innerHTML =
       `<a accesskey="C" href="${this.getAttribute('regreso')}">Cancelar</a>

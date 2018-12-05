@@ -6,7 +6,7 @@ customElements.define("lista-basica", class extends HTMLElement {
     this.classList.add("cargando");
   }
   muestra(urlDetalle, lista) {
-    if (filas.length) {
+    if (lista.length) {
       this.classList.remove("cargando");
       this.classList.remove("vacio");
       let contenido = "";
@@ -24,7 +24,7 @@ customElements.define("lista-basica", class extends HTMLElement {
           contenido += `<span class='texto1'>${eh(modelo.texto1)}"</span>`;
         }
         if (modelo.texto2) {
-          contenido += `<div class='texto2'>${eh(modelo.texto2)}"</div>`;
+          contenido += `<div class='texto2'>${eh(modelo.texto2)}</div>`;
         }
         contenido += "</div>";
       }

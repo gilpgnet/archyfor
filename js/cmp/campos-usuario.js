@@ -5,8 +5,8 @@ customElements.define("campos-usuario", class extends HTMLElement {
         <label accesskey="A">
           Avatar
           <input type="file" name="avatar" accept=".png,.jpg,.jpeg,.gif">
-          <img alt="Falta seleccionar imagen.">
         </label>
+        <img alt="Falta seleccionar imagen.">
       </p>
       <p>
         <label accesskey="M">
