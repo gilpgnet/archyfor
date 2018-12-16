@@ -1,3 +1,6 @@
+export function texto(s) {
+  return s ? s : "";
+}
 export function muestraError(e) {
   console.error(e);
   alert(e.message);

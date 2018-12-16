@@ -1,9 +1,11 @@
-import { query, execute, agregaOpciones, muestraError, muestraArchivoSeleccionado }
+import { query, execute, texto, agregaOpciones, muestraError, muestraArchivoSeleccionado }
   from "./lib/util.js";
 const parametros = new URLSearchParams(location.search);
 const cue = parametros.get("cue");
 const vista = document.vista;
 vista.cue.value = cue;
+document.title = cue;
+vista.titulo.value = cue;
 vista.addEventListener("submit", guarda);
 vista.elimina.addEventListener("click", elimina);
 /* Cuando cambia el el archivo seleccionado por el usuario, se invoca la
@@ -16,11 +18,7 @@ async function carga() {
     const respuesta = await
       query("servicios/usuarios_busca.php?XDEBUG_SESSION_START=name&cue="
         + encodeURIComponent(cue));
-    document.title = cue;
-    vista.titulo.value = cue;
-    document.querySelector("img").src = respuesta.modelo.avatar;
-    vista.nombre.value = respuesta.modelo.nombre;
-    vista.pasatiempo.value = respuesta.modelo.pas_id;
+    document.querySelector("img").src = texto(respuesta.modelo.avatar);
     agregaOpciones(vista.pasatiempo, respuesta.pasatiempos);
     agregaOpciones(vista["roles[]"], respuesta.roles);
   } catch (e) {
