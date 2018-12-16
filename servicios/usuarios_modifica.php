@@ -30,7 +30,7 @@ try {
       WHERE USU_CUE = ?",
       "ss", $match, $cue);
   }
-  if (isset($_FILES["avatar"]) && $_FILES["avatar"]["size"] > 0) {
+  if (archivoRecibido("avatar")) {
     $avatar = getDataAsURL($_FILES["avatar"]["tmp_name"]);
     $con->execute(
       "UPDATE USUARIO

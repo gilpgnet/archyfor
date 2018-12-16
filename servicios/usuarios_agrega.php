@@ -21,7 +21,7 @@ try {
   valida(preg_match("/^\\w{5,25}$/", $match),
     "El match debe tener 5 a 25 letras o dígitos.");
   valida($nombre, "Falta el nombre.");
-  valida(isset($_FILES["avatar"]) && $_FILES["avatar"]["size"] > 0, "Falta el avatar.");
+  valida(archivoRecibido("avatar"), "Falta el avatar.");
   $avatar = getDataAsURL($_FILES["avatar"]["tmp_name"]);
   $con->execute(
     "INSERT INTO USUARIO (USU_CUE, USU_AVATAR, USU_MATCH, USU_NOMBRE, PAS_ID)

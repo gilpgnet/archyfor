@@ -15,3 +15,6 @@ function getDataAsURL($archivo) {
   $finfo = new finfo(FILEINFO_MIME);
   return 'data: ' . $finfo->file($archivo) . ';base64,' . base64_encode(file_get_contents($archivo));
 }
+function archivoRecibido($nombre) {
+  return isset($_FILES[$nombre]) && $_FILES[$nombre]["size"] > 0;
+}
