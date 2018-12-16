@@ -13,7 +13,7 @@ customElements.define("lista-basica", class extends HTMLElement {
       for (const modelo of lista) {
         contenido += "<div class='fila'>";
         if (modelo.imagen) {
-          contenido += `<img class='imagen' src="${modelo.imagen}" alt="${eh(modelo.alt)}">`;
+          contenido += `<img class='imagen' src="${modelo.imagen}">`;
         }
         if (urlDetalle) {
           contenido +=
