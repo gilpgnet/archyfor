@@ -19,6 +19,7 @@ async function carga() {
       query("servicios/usuarios_busca.php?XDEBUG_SESSION_START=name&cue="
         + encodeURIComponent(cue));
     document.querySelector("img").src = texto(respuesta.modelo.avatar);
+    vista.nombre.value = respuesta.modelo.nombre;
     agregaOpciones(vista.pasatiempo, respuesta.pasatiempos);
     agregaOpciones(vista["roles[]"], respuesta.roles);
   } catch (e) {
