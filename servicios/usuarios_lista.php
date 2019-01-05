@@ -4,8 +4,6 @@ require_once "util.php";
 require_once "conecta.php";
 $respuesta = new stdClass();
 try {
-  $respuesta->cue = isset($_SESSION["cue"]) ? $_SESSION["cue"] : "";
-  $respuesta->roles = isset($_SESSION["roles"]) ? $_SESSION["roles"] : [];
   $con->verifica();
   $con->query(
     "SELECT U.USU_CUE AS id, U.USU_AVATAR AS imagen, U.USU_CUE AS texto1,
