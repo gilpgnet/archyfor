@@ -30,7 +30,7 @@ try {
       $roles[$obj->ROL_ID] = true;
     }
   }
-  // Recupera aficiones para el select. (Relación a uno.)
+  // Recupera pasatiempos para el select. (Relación a uno.)
   $con->query(
     "SELECT PAS_ID, PAS_NOMBRE
       FROM PASATIEMPO
