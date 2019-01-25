@@ -1,7 +1,9 @@
 # archyfor
 Manejo simplificado de archivos y llaves foráneas.
 
-https://archyfor.000webhostapp.com/
+Lo puedes ver funcionando en https://archyfor.000webhostapp.com/.
+
+Para entender mejor el código, se recomienda estudiar primero los proyectos https://github.com/gilpgnet/web1, https://github.com/gilpgnet/web2, https://github.com/gilpgnet/servicio y https://github.com/gilpgnet/sincro.
 
 ## Configuración
 Para imágenes más grandes, editar el archivo de configuración de MySQL
