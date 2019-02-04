@@ -12,3 +12,9 @@ Para imágenes más grandes, editar el archivo de configuración de MySQL
 
 Si tu servidor no soporta transacciones, comenta las líneas con
 begin_transaction y commit.
+
+## Ejecución
+Para poder ejecutarse el código, primero han de crearse la base de datos, el usuario y la tabla con el script del archivo
+[sql/create.sql](/sql/create.sql).
+
+Modifica el archivo [servicio/conecta.php](/servicio/conecta.php) para usar la conexión de tu servidor.
